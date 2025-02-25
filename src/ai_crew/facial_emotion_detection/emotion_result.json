@@ -1,0 +1,47 @@
+[
+    {
+        "id": 343319,
+        "date_time": "2025-02-22T09:09:51.326574",
+        "detected_emotion": "fear"
+    },
+    {
+        "id": 316235,
+        "date_time": "2025-02-22T09:10:21.331945",
+        "detected_emotion": "sad"
+    },
+    {
+        "id": 516683,
+        "date_time": "2025-02-22T09:10:51.380858",
+        "detected_emotion": "sad"
+    },
+    {
+        "id": 411231,
+        "date_time": "2025-02-22T09:11:21.386441",
+        "detected_emotion": "neutral"
+    },
+    {
+        "id": 667354,
+        "date_time": "2025-02-22T09:11:51.413143",
+        "detected_emotion": "sad"
+    },
+    {
+        "id": 7352,
+        "date_time": "2025-02-22T09:12:51.526513",
+        "detected_emotion": "sad"
+    },
+    {
+        "id": 16608,
+        "date_time": "2025-02-22T09:13:21.527271",
+        "detected_emotion": "sad"
+    },
+    {
+        "id": 161981,
+        "date_time": "2025-02-22T09:13:51.558900",
+        "detected_emotion": "neutral"
+    },
+    {
+        "id": 983875,
+        "date_time": "2025-02-22T09:14:21.560390",
+        "detected_emotion": "fear"
+    }
+]

@@ -1,0 +1,46 @@
+nlp_task:
+  description: >
+    - Fine-tune AI responses based on mood and emotions.
+    - Improve speech-to-text accuracy for emotion-based dialogue.
+    - Optimize multi-agent collaboration for effective brainstorming sessions.
+  expected_output: >
+    Enhanced AI interactions with improved emotion-based dialogue and multi-agent collaboration.
+  agent: nlp_agent
+  output_file: src/ai_crew/nlp/nlp.py
+
+# speech_processing_task:
+#   description: >
+#     - Develop speech processing algorithms for emotion-based dialogue.
+#     - Implement real-time voice analysis for mood detection.
+#     - Optimize speech-to-text accuracy for AI-driven interactions.
+#   expected_output: >
+#     Speech processing algorithms that support emotion-based dialogue and real-time voice analysis.
+#   agent: speech_processing_engineer
+
+speech_to_text_task:
+  description: >
+    - Implement speech-to-text algorithms for emotion-based dialogue.
+    - Optimize text generation based on user mood and expressions.
+    - Enhance AI responses with accurate speech-to-text conversion.
+  expected_output: >
+    Speech-to-text algorithms that accurately interpret user emotions and enhance AI interactions.
+  agent: speech_to_text_agent
+  output_file: src/ai_crew/speech_to_text/speech_to_text_output.py
+
+
+# computer_vision_task:
+#   description: >
+#     - Build a real-time facial emotion detection system.
+#     - Train AI models to interpret user expressions & mood changes.
+#     - Integrate with chat system to adjust AI responses dynamically.
+#   expected_output: >
+#     A working system that can accurately detect and interpret user emotions in real-time.
+#   agent: computer_vision_engineer
+#   output_file: src/ai_crew/facial_emotion_detection/computer_vision_task_output.py
+
+facial_emotion_task:
+  description: >
+    - Run facial_emotion_detection/computer_vision_task_output.py file to detect and interpret user emotions in real-time.
+  expected_output: >
+    The result of the facial emotion detection and interpretation.
+  agent: computer_vision_engineer

@@ -1,0 +1,23 @@
+[project]
+name = "neo_bond"
+version = "0.1.0"
+description = "neo_bond using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.102.0,<1.0.0"
+]
+
+[project.scripts]
+neo_bond = "neo_bond.main:run"
+run_crew = "neo_bond.main:run"
+train = "neo_bond.main:train"
+replay = "neo_bond.main:replay"
+test = "neo_bond.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

@@ -1,0 +1,32 @@
+# Transformers library for NLP tasks
+transformers
+
+# PyTorch for deep learning tasks
+torch
+
+# Datasets library for loading datasets
+datasets
+
+# Pydantic for data validation and settings management
+pydantic
+
+# FastAPI for building web APIs
+fastapi
+
+# SQLAlchemy for database interactions
+sqlalchemy
+
+# Google genai for speech-to-text functionality
+google-genai
+
+# OpenCV for computer vision tasks
+opencv-python
+
+# DeepFace for facial emotion detection
+deepface
+
+# CrewAI tools for various project functionalities
+crewAI-tools
+
+# Langchain for AI language models
+langchain-openai
