@@ -1,13 +1,11 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 # PostgreSQL Database URL
 database_url = "postgresql://postgres:Blake3214@localhost/neobond"
 
 # Create a new SQLAlchemy engine
 engine = create_engine(database_url)
-
 # Create a configured "Session" class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -24,3 +22,5 @@ def get_db():
     yield db
   finally:
     db.close()
+
+# Call getdb() to get a database session

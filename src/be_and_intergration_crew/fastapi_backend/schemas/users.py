@@ -5,9 +5,9 @@ from uuid import UUID
 
 class UserSchema(BaseModel):
     id: Optional[UUID]
-    username: str
     email: EmailStr
-    password_hash: str
+    username: str
+    password: str
     created_at: Optional[datetime]
     last_login: Optional[datetime]
     preferences: Optional[dict]

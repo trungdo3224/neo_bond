@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi_backend.schemas.ai_responses import AIResponseSchema
 from fastapi_backend.models.ai_responses import AIResponse
-from ..database import get_db
+from fastapi_backend.database import get_db
 
 router = APIRouter()
 

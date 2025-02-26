@@ -3,8 +3,6 @@
 # Session from SQLAlchemy for database interactions
 # Import models and database setup from the current package
 from fastapi import FastAPI
-import signal
-import sys
 # Initialize the FastAPI app
 app = FastAPI(title="Neo Bond API")
 from routers import (
@@ -16,9 +14,6 @@ from routers import (
     speech_inputs,
     ai_responses,
     mood_tracking,
-    items,
-    auth,
-    bot
 )
 
 # Include all routers
@@ -30,9 +25,6 @@ app.include_router(emotions.router, prefix="/api", tags=["emotions"])
 app.include_router(speech_inputs.router, prefix="/api", tags=["speech_inputs"])
 app.include_router(ai_responses.router, prefix="/api", tags=["ai_responses"])
 app.include_router(mood_tracking.router, prefix="/api", tags=["mood_tracking"])
-app.include_router(items.router, prefix="/api", tags=["items"])
-app.include_router(auth.router, prefix="/api", tags=["auth"])
-app.include_router(bot.router, prefix="/api", tags=["bot"])
 
 # Enable CORS
 # app.add_middleware(
@@ -54,5 +46,4 @@ def read_root():
 # Add event handler for shutdown
 @app.on_event("shutdown")
 async def app_shutdown_event():
-    with open("log.txt", mode="a") as log:
-        log.write("Application shutdown")
+    print("Application shutdown")

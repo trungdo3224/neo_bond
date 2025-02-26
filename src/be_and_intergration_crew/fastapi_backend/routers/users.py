@@ -3,71 +3,64 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from fastapi_backend import database
-from fastapi_backend.services import users_service
-
+from fastapi_backend.services.users import UserService
+from fastapi_backend.schemas.users import UserSchema
 router = APIRouter()
 
-databaseSession = Depends(database.get_db)
+database_session = Depends(database.get_db)
 
-@router.get("/")
-async def get_users(db: Session = databaseSession):
+users_service = UserService()
+
+@router.get("/users")
+def get_users(db: Session = Depends(database.get_db)):
+    if not db:
+        raise HTTPException(status_code=500, detail="No database connection")
     try:
-        users = users_service.get_users(db=db)
-        if users:
-            print(users)
-            return users
-        else:
-            return {"message": "No users found"}
+        users = users_service.get_users(db)
+        if not users:
+            raise HTTPException(status_code=404, detail="No users found.")
+        
+        return users
     except Exception as e:
-        print(e)
-        return {"error_message": str(e)}
+        error_details = str(e) or "Register Failed."
+        raise HTTPException(status_code=404, detail=error_details)
 
-@router.get("/{id}")
-async def get_user(id: str, db: Session = databaseSession):
+@router.get("/users/{id}")
+def get_user(id: str, db: Session = Depends(database.get_db)):
     try:
-        user = users_service.get_user(id, db)
+        user = users_service.get_user_by_id(id, db)
         if not user:
             raise HTTPException(status_code=404, detail="User not found.")
+        user.pop("password_hash", None)
         return user
     except Exception as e:
-        return {"error_message": str(e)}
+        raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.post("/signup")
-async def create_user(user: dict, db: Session = databaseSession):
-    if(user):
-        try:
-            result = users_service.create_user(user, db=db)
-            if result:
-                return {
-                    "message": result["message"],
-                    "user: ": result["user"],
-                }
-            else:
-                return {"message": "User not created"}
-        except Exception as e:
-            return {"error_message": str(e)}
-    else:
-        return {"message": "No user data"}
+@router.post("/users/signup")
+def create_user(user: UserSchema, db: Session = Depends(database.get_db)):
+    if not user:
+        raise HTTPException(status_code=400, detail="No user data provided")
+    try:
+        result = users_service.create_user(user, db)
+        print(result)
+        if result:
+            # Exclude password_hash from the result
+            return result
+        else:
+            raise HTTPException(status_code=500, detail="Register Failed.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Register Failed.")
 
 
 
-# @router.put("/users/{user_id}", response_model=UserSchema)
-# def update_user(user_id: str, user: UserSchema, db: Session = Depends(get_db)):
-#     db_user = db.query(User).filter(User.id == user_id).first()
-#     if db_user is None:
-#         raise HTTPException(status_code=404, detail="User not found")
-#     for key, value in user.dict().items():
-#         setattr(db_user, key, value)
-#     db.commit()
-#     db.refresh(db_user)
-#     return db_user
+@router.put("/users/{user_id}")
+def update_user(user_id: str, user: UserSchema, db: Session = database_session):
+    users_service.update_user(user_id, user, db)
+    return user
+    
 
-# @router.delete("/users/{user_id}", response_model=UserSchema)
-# def delete_user(user_id: str, db: Session = Depends(get_db)):
-#     user = db.query(User).filter(User.id == user_id).first()
-#     if user is None:
-#         raise HTTPException(status_code=404, detail="User not found")
-#     db.delete(user)
-#     db.commit()
-#     return user
+@router.delete("/users/{user_id}")
+def delete_user(user_id: str, db: Session = database_session):
+    users_service.delete_user(user_id, db)
+    return {"message": "User deleted successfully."}

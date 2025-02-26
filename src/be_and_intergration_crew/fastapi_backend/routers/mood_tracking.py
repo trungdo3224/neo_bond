@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi_backend.schemas.mood_tracking import MoodTrackingSchema
 from fastapi_backend.models.mood_tracking import MoodTracking
-from ..database import get_db
+from fastapi_backend.database import get_db
 
 router = APIRouter()
 

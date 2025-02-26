@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi_backend.schemas.messages import MessageSchema
 from fastapi_backend.models.messages import Message
-from ..database import get_db
+from fastapi_backend.database import get_db
 
 router = APIRouter()
 

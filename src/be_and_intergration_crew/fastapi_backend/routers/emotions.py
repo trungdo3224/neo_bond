@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi_backend.schemas.emotions import EmotionSchema
 from fastapi_backend.models.emotions import Emotion
-from ..database import get_db
+from fastapi_backend.database import get_db
 
 router = APIRouter()
 

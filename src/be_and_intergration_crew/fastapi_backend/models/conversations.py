@@ -1,9 +1,8 @@
 from sqlalchemy import Column, ForeignKey, TIMESTAMP
-from sqlalchemy.dialects.postgresql import UUID, JSONB
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.dialects.postgresql import UUID
+from fastapi_backend.database import Base
 import uuid
 
-Base = declarative_base()
 
 class Conversation(Base):
     __tablename__ = 'conversations'
@@ -12,4 +11,3 @@ class Conversation(Base):
     ai_id = Column(UUID(as_uuid=True), ForeignKey('ai_instances.id', ondelete='CASCADE'))
     start_time = Column(TIMESTAMP, default='now()')
     end_time = Column(TIMESTAMP)
-    metadata = Column(JSONB)
