@@ -90,5 +90,3 @@ An AI-powered **companion system** designed to enhance user interaction by recog
 ## **🚀 Final Thoughts**
 This AI companion project has the potential to **redefine personalized AI interactions** by integrating **emotion-based conversations, adaptive learning, and entertainment recommendations**. The Mood Map Movies integration is just the start of a **larger ecosystem** aimed at enhancing digital companionship.
 
-🔥 **Would you like to start with a prototype focusing on AI + movie recommendations first?**
-
