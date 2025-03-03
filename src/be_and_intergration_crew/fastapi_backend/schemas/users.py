@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
 from uuid import UUID
+from typing import Union
 
 class UserSchema(BaseModel):
     id: Optional[UUID]
@@ -14,3 +15,7 @@ class UserSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class CurrentUserSchema(BaseModel):
+    username: Optional[str]
+    email: Optional[str]

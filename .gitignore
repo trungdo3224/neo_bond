@@ -1,4 +1,5 @@
 .env
 .venv
+apps_fe
 __pycache__/
 .DS_Store

@@ -1,8 +1,9 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from fastapi_backend.auth.auth import get_password_hash
+from fastapi_backend.utilities.auth import get_password_hash, verify_password, create_access_token
 from fastapi_backend.models.users import User
 from fastapi_backend.schemas.users import UserSchema
+from fastapi_backend.schemas.auth import AuthSchema
 from fastapi import HTTPException
 from sqlalchemy import func
 
@@ -81,7 +82,7 @@ class UserService:
             }
         try:
             # Hash the password
-            hashed_password = get_password_hash(str(user.password))
+            hashed_password = get_password_hash(user.password)
 
             # Create a new user instance
             new_user = User(
@@ -107,7 +108,27 @@ class UserService:
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
     
-    
+    def login_user(self, user: AuthSchema, db: Session) -> Optional[User]:
+        if not user:
+            raise HTTPException(status_code=400, detail="No user data provided")
+        try:
+            user_found = db.query(User).filter(User.email == user.email).first()
+
+            if not user_found:
+                raise HTTPException(status_code=404, detail="Check your email or password")
+            is_password_matched = verify_password(user.password, user_found.password_hash)
+            if not is_password_matched:
+                raise HTTPException(status_code=401, detail="Check your email or password")
+            user_found.last_login = func.now()
+            db.commit()
+            db.refresh(user_found)
+            user_token = create_access_token(data={"sub": user.email})
+            return {
+                "token": user_token,
+            }
+            # return user
+        except Exception as e:
+            raise HTTPException(status_code=404, detail=str(e))
 
     def update_user(self, user_id: str, db: Session) -> Optional[User]:
         db_user = db.query(User).filter(User.id == user_id).first()
